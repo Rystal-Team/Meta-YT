@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://raw.githubusercontent.com/Rystal-Team/Rystal-V6/main/assets/logo.png">
-    <img src="./assets/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/Rystal-Team/Rystal-V6/main/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">Rystal V6</h3>
   <p align="center">
