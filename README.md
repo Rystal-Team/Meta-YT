@@ -4,7 +4,7 @@
   <a href="https://raw.githubusercontent.com/Rystal-Team/Rystal-V6/main/assets/logo.png">
     <img src="https://raw.githubusercontent.com/Rystal-Team/Rystal-V6/main/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
-  <h3 align="center">Rystal V6</h3>
+  <h3 align="center">Meta-YT</h3>
   <p align="center">
     Meta-YT is a lightweight Python library for fetching YouTube video metadata. It allows users to interact with YouTube videos, captions, and playlists, making it easier to retrieve information and captions from YouTube.
     <br />

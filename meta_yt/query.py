@@ -49,7 +49,7 @@ class Query:
             except Exception:
                 continue
 
-    def __search__(self):
+    def __search__(self): 
         """
         Perform a YouTube search and parse the results.
 
