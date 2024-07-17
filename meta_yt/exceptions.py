@@ -1,27 +1,34 @@
 class MetaYTError(Exception):
-    """Base exception for inheritance."""
-
+    """
+    Base exception for inheritance.
+    """
+    pass
 
 class VideoUnavailable(MetaYTError):
-    """Exception `VideoUnavailable`"""
+    """
+    Exception raised when a video is unavailable.
+
+    :param videoId: The ID of the unavailable video.
+    :type videoId: str
+    """
 
     def __init__(self, videoId: str):
         """
         Initializes a `VideoUnavailable` exception instance.
 
-        Args:
-            videoId (str): The ID of the unavailable video.
+        :param videoId: The ID of the unavailable video.
+        :type videoId: str
         """
         self.videoId = videoId
         super().__init__(self.error_message)
 
     @property
-    def error_message(self):
+    def error_message(self) -> str:
         """
         Returns the error message for the VideoUnavailable exception.
 
-        Returns:
-            str: The error message explaining why the video is unavailable.
+        :return: The error message explaining why the video is unavailable.
+        :rtype: str
         """
         return (
             f"Video ID: `{self.videoId}` is unavailable, it might be caused by various reasons such as:\n"

@@ -5,15 +5,24 @@ from .caption import Caption
 
 
 class Video:
+    """
+    A class to represent a YouTube video and fetch its details using the YouTube API.
+
+    :param videoId: The ID of the YouTube video used to fetch its details.
+    :type videoId: str
+    :param retries: The number of retry attempts for fetching video details. Defaults to 5.
+    :type retries: int
+    """
+
     def __init__(self, videoId: str, retries=5):
         """
-        The function initializes a class instance with video details fetched from the YouTube API.
+        Initialize a Video object with details fetched from the YouTube API.
 
-        Arguments:
-
-        * `videoId`: The ID of the YouTube video used to fetch its details.
+        :param videoId: The ID of the YouTube video used to fetch its details.
+        :type videoId: str
+        :param retries: The number of retry attempts for fetching video details. Defaults to 5.
+        :type retries: int
         """
-
         url = "https://www.youtube.com/youtubei/v1/player"
         params = {
             "videoId": videoId,
@@ -45,7 +54,7 @@ class Video:
                 # Assigning extracted video details to instance variables.
                 self.url = f"https://youtu.be/{video_id}"  # URL of the YouTube video.
                 self.title = data["title"]  # Title of the video.
-                self.video_id = video_id # ID of the video.
+                self.video_id = video_id  # ID of the video.
                 self.channel = data["author"]  # Channel name of the video.
                 self.duration = int(data["lengthSeconds"])  # Duration of the video.
                 self.views = int(data["viewCount"])  # Number of views on the video.
@@ -65,38 +74,11 @@ class Video:
 
     def get_captions(self, include_generated: bool = False):
         """
-        The function `get_captions` retrieves caption tracks from metadata, filtering out auto-generated
-        captions based on the `include_generated` parameter.
+        Retrieve caption tracks from metadata, filtering out auto-generated captions based on the `include_generated` parameter.
 
-        Arguments:
-
-        * `include_generated`: The `include_generated` parameter is a boolean flag that determines
-        whether auto-generated captions should be included in the result or not. If `include_generated`
-        is set to `True`, then all captions, including auto-generated ones, will be returned. If set to
-        `False`, auto-generated captions will be
-
-        Returns:
-
-        A dictionary of Caption objects, where the keys are the language codes of the captions.
+        :param include_generated: A boolean flag that determines whether auto-generated captions should be included in the result or not. If set to `True`, all captions, including auto-generated ones, will be returned. If set to `False`, auto-generated captions will be excluded. Defaults to False.
+        :type include_generated: bool
+        :return: A dictionary of Caption objects, where the keys are the language codes of the captions.
+        :rtype: dict
         """
-        caption_tracks = self.metadata["captions"]["playerCaptionsTracklistRenderer"][
-            "captionTracks"
-        ]
-
-        captions = {}
-        # This block of code is iterating over each caption track in the `caption_tracks` list
-        # obtained from the video metadata. It checks if the caption track is auto-generated based on
-        # the presence of the term "auto-generated" in the caption track's name.
-        for track in caption_tracks:
-            if (
-                "auto-generated" in track["name"]["runs"][0]["text"]
-                and not include_generated
-            ):
-                continue
-            caption = Caption(
-                track["baseUrl"],
-                track["languageCode"],
-            )
-            captions[caption.language] = caption
-
-        return captions
+        return {Caption(track["baseUrl"], track["languageCode"]).language: Caption(track["baseUrl"], track["languageCode"]) for track in self.metadata.get("captions", {}).get("playerCaptionsTracklistRenderer", {}).get("captionTracks", []) if "auto-generated" not in track.get("name", {}).get("runs", [{}])[0].get("text", "") or include_generated}
