@@ -60,14 +60,14 @@ class Query:
         """
         Perform a YouTube search and parse the results.
         """
-        encoded_query = urllib.parse.quote_plus(self.query)  # Encode the search query
-        query_url = f"https://youtube.com/results?search_query={encoded_query}"  # Construct the search URL
-        response = requests.get(query_url)  # Send a GET request to the search URL
+        encoded_query = urllib.parse.quote_plus(self.query)
+        query_url = f"https://youtube.com/results?search_query={encoded_query}"
+        response = requests.get(query_url)
 
         while "ytInitialData" not in response.text:
             response = requests.get(query_url)
 
-        self.__parse__(response.text)  # Parse the search response
+        self.__parse__(response.text)
 
     @property
     def results(self) -> list | None:
@@ -79,4 +79,4 @@ class Query:
         """
         return self.__results[
             : self.max_results
-        ]  # Return the results, limited by the max_results count
+        ]
