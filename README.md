@@ -9,16 +9,16 @@
     Meta-YT is a lightweight Python library for fetching YouTube video metadata. It allows users to interact with YouTube videos, captions, and playlists, making it easier to retrieve information and captions from YouTube.
     <br />
     <br />  
-    <a href="https://github.com/Rystal-Team/Rystal-V6/issues">Submit Issues</a> · <a href="https://github.com/Rystal-Team/Rystal-V6/releases">Releases</a>
+    <a href="https://github.com/Rystal-Team/Meta-YT/issues">Submit Issues</a> · <a href="https://github.com/Rystal-Team/Meta-YT/releases">Releases</a>
   </p>
 </div>
 
 <div align="center">
 
-  [![GitHub Forks](https://img.shields.io/github/forks/Rystal-Team/Rystal-V6.svg?style=for-the-badge)](https://github.com/Rystal-Team/Rystal-V6)
-  [![GitHub Stars](https://img.shields.io/github/stars/Rystal-Team/Rystal-V6.svg?style=for-the-badge)](https://github.com/Rystal-Team/Rystal-V6)
-  [![License](https://img.shields.io/github/license/Rystal-Team/Rystal-V6.svg?style=for-the-badge)](https://github.com/Rystal-Team/Rystal-V6/blob/main/LICENSE)
-  [![Github Watchers](https://img.shields.io/github/watchers/Rystal-Team/Rystal-V6.svg?style=for-the-badge)](https://github.com/Rystal-Team/Rystal-V6)
+  [![GitHub Forks](https://img.shields.io/github/forks/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
+  [![GitHub Stars](https://img.shields.io/github/stars/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
+  [![License](https://img.shields.io/github/license/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT/blob/main/LICENSE)
+  [![Github Watchers](https://img.shields.io/github/watchers/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
 
 </div>
 
