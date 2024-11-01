@@ -54,17 +54,14 @@ class YouTube:
         """
         self.isUrl = isUrl
         self.video = None
+        result = None
 
-        if self.isUrl is None:
-            self.videoId = get_video_id(query)
-
-            if self.videoId is None:
-                self.isUrl = False
-
-        if not self.isUrl:
+        if self.isUrl:
             result = get_video_id(query)
-            if result is not None:
-                self.videoId = result
+
+            if result is None:
+                raise ValueError("Invalid YouTube URL")
+            self.videoId = result
 
         if result is None:
             results = Query(query, max_results=1).results
@@ -72,5 +69,5 @@ class YouTube:
             self.videoId = results[0]["videoId"]
 
         self.video = Video(self.videoId)
-        
+
         return

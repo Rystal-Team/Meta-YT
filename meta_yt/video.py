@@ -2,7 +2,6 @@
 
 import requests
 from .caption import Caption
-from .exceptions import FailedToFetch
 
 
 class Video:
@@ -64,14 +63,14 @@ class Video:
                 self.channel_url = f"https://www.youtube.com/channel/{channel_id}"  # URL of the video channel.
                 self.metadata = (
                     response.json()
-                )
+                )  # Additional metadata fetched from the YouTube API.
 
-                return
+                return  # Exit
             except (requests.RequestException, KeyError) as e:
                 if attempt < retries - 1:
                     pass
                 else:
-                    raise FailedToFetch(videoId, str(e))
+                    raise e
 
     def get_captions(self, include_generated: bool = False):
         """
