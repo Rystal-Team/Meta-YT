@@ -105,16 +105,20 @@ Initializes a Video object.
 
 #### Attributes
 
+- `video_id` The video ID.
 - `url`: The URL of the YouTube video.
 - `title`: The title of the video.
 - `channel`: The channel name of the video.
 - `duration`: The duration of the video.
 - `views`: The number of views on the video.
 - `thumbnail`: The URL of the video thumbnail.
+- `thumbnails`: A list of all URLs of video thumbnails.
 - `channel_url`: The URL of the video channel.
+- `channel_id`: The ID of the video channel.
+- `keywords`: A list of keywords of the video.
 - `metadata`: Additional metadata fetched from the YouTube API.
 
-#### `get_captions(self, include_generated: bool = False) -> dict`
+#### `get_captions(self, include_generated: bool = False) -> list`
 
 Fetches the captions for the video.
 
@@ -122,7 +126,7 @@ Fetches the captions for the video.
 - `include_generated` (bool, optional): Whether to include auto-generated captions. Defaults to `False`.
 
 **Returns:**
-- `dict`: A dictionary of `Caption` objects.
+- `captions`: A list of `Caption` objects.
 
 ### `class Caption`
 
