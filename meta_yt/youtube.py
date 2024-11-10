@@ -69,5 +69,3 @@ class YouTube:
             self.videoId = results[0]["videoId"]
 
         self.video = Video(self.videoId)
-
-        return
