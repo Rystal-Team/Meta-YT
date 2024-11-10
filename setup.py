@@ -1,8 +1,15 @@
 from setuptools import setup, find_packages
+import codecs
+import os
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
+    long_description = "\\n" + fh.read()
 
 setup(
     name="meta_yt",
-    version="0.1.2-beta",
+    version="{{VERSION_PLACEHOLDER}}",
     packages=find_packages(),
     author="Rystal-Team",
     author_email="code@rystal.xyz",
