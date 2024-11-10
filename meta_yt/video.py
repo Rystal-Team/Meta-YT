@@ -46,26 +46,24 @@ class Video:
                 response.raise_for_status()
                 data = response.json()["videoDetails"]
 
-                # Extracting specific video details from the response data.
                 video_id = data["videoId"]
                 channel_id = data["channelId"]
                 thumbnails = data["thumbnail"]["thumbnails"]
 
-                # Assigning extracted video details to instance variables.
-                self.url = f"https://youtu.be/{video_id}"  # URL of the YouTube video.
-                self.title = data["title"]  # Title of the video.
-                self.video_id = video_id  # ID of the video.
-                self.channel = data["author"]  # Channel name of the video.
-                self.duration = int(data["lengthSeconds"])  # Duration of the video.
-                self.views = int(data["viewCount"])  # Number of views on the video.
-                self.thumbnail = thumbnails[-1]["url"]  # URL of the video thumbnail.
-                self.thumbnails = thumbnails  # List of thumbnails of the video.
-                self.channel_url = f"https://www.youtube.com/channel/{channel_id}"  # URL of the video channel.
-                self.metadata = (
-                    response.json()
-                )  # Additional metadata fetched from the YouTube API.
+                self.url = f"https://youtu.be/{video_id}"
+                self.title = data["title"]
+                self.video_id = video_id
+                self.channel = data["author"]
+                self.duration = int(data["lengthSeconds"])
+                self.views = int(data["viewCount"])
+                self.thumbnail = thumbnails[-1]["url"]
+                self.thumbnails = thumbnails
+                self.channel_id = channel_id
+                self.channel_url = f"https://www.youtube.com/channel/{channel_id}"
+                self.keywords = data.get("keywords", [])
+                self.metadata = response.json()
 
-                return  # Exit
+                return
             except (requests.RequestException, KeyError) as e:
                 if attempt < retries - 1:
                     pass
@@ -81,4 +79,14 @@ class Video:
         :return: A dictionary of Caption objects, where the keys are the language codes of the captions.
         :rtype: dict
         """
-        return {Caption(track["baseUrl"], track["languageCode"]).language: Caption(track["baseUrl"], track["languageCode"]) for track in self.metadata.get("captions", {}).get("playerCaptionsTracklistRenderer", {}).get("captionTracks", []) if "auto-generated" not in track.get("name", {}).get("runs", [{}])[0].get("text", "") or include_generated}
+        return {
+            Caption(track["baseUrl"], track["languageCode"]).language: Caption(
+                track["baseUrl"], track["languageCode"]
+            )
+            for track in self.metadata.get("captions", {})
+            .get("playerCaptionsTracklistRenderer", {})
+            .get("captionTracks", [])
+            if "auto-generated"
+            not in track.get("name", {}).get("runs", [{}])[0].get("text", "")
+            or include_generated
+        }
