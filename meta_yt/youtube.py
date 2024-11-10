@@ -2,6 +2,7 @@
 
 # Import necessary modules
 from urllib import parse  # Module for URL parsing
+
 from .query import Query  # Importing the Query class for performing YouTube searches
 from .video import Video  # Importing the Video class for handling YouTube videos
 
@@ -69,5 +70,3 @@ class YouTube:
             self.videoId = results[0]["videoId"]
 
         self.video = Video(self.videoId)
-
-        return
