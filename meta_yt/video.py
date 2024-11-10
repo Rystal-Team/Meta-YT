@@ -91,9 +91,8 @@ class Video:
 
             if is_auto_generated and not include_generated:
                 continue
-            else:
-                captions.append(
-                    Caption(track["baseUrl"], track["languageCode"], is_auto_generated)
-                )
+            captions.append(
+                Caption(track["baseUrl"], track["languageCode"], is_auto_generated)
+            )
 
         return captions
