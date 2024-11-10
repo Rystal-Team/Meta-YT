@@ -1,6 +1,4 @@
-"""
-Meta-YT: A lightweight Python library for fetching YouTube videos' metadata.
-"""
+"""Meta-YT: A lightweight Python library for fetching YouTube videos' metadata."""
 
 __title__ = "Meta-YT"
 __author__ = "Rystal-Team"

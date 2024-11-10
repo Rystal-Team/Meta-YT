@@ -57,9 +57,7 @@ class Query:
                 continue
 
     def __search__(self):
-        """
-        Perform a YouTube search and parse the results.
-        """
+        """Perform a YouTube search and parse the results."""
         encoded_query = urllib.parse.quote_plus(self.query)  # Encode the search query
         query_url = f"https://youtube.com/results?search_query={encoded_query}"  # Construct the search URL
         response = requests.get(query_url)  # Send a GET request to the search URL

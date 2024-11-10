@@ -1,7 +1,5 @@
 class MetaYTError(Exception):
-    """
-    Base exception for inheritance.
-    """
+    """Base exception for inheritance."""
 
     pass
 
