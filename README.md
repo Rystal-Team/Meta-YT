@@ -70,10 +70,10 @@ You can fetch captions for a video and convert them to SubRip (SRT) format.
 
 ```python
 captions = yt.video.get_captions(include_generated=True)
-for lang, caption in captions.items():
-    print(f"Captions in {lang}:")
-    for line in caption.transcript:
-        print(f"{line['start']} - {line['end']}: {line['text']}")
+for caption in captions:
+    print(caption.language_code)
+    print(caption.auto_generated)
+    print(caption.to_srt())
 ```
 
 Since this library does not include a function to download or decrypt video streams, you will need to use external libraries such as YTDL or PyTube for those purposes.
