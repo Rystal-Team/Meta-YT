@@ -1,5 +1,7 @@
-import requests, json  # Modules for making HTTP requests and parsing JSON data
+import json
 import urllib.parse  # Module for URL encoding
+
+import requests  # Modules for making HTTP requests and parsing JSON data
 
 
 class Query:
@@ -45,9 +47,12 @@ class Query:
                 for video in contents["itemSectionRenderer"]["contents"]:
                     if "videoRenderer" in video.keys():
                         try:
-                            result = {"title": video["videoRenderer"]["title"]["runs"][
-                                0
-                            ]["text"], "videoId": video["videoRenderer"]["videoId"]}
+                            result = {
+                                "title": video["videoRenderer"]["title"]["runs"][0][
+                                    "text"
+                                ],
+                                "videoId": video["videoRenderer"]["videoId"],
+                            }
                             self.__results.append(result)
                         except Exception:
                             continue
