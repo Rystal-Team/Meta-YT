@@ -1,5 +1,7 @@
-import requests, json  # Modules for making HTTP requests and parsing JSON data
+import json
 import urllib.parse  # Module for URL encoding
+
+import requests
 
 
 class Query:
@@ -45,11 +47,12 @@ class Query:
                 for video in contents["itemSectionRenderer"]["contents"]:
                     if "videoRenderer" in video.keys():
                         try:
-                            result = {}
-                            result["title"] = video["videoRenderer"]["title"]["runs"][
-                                0
-                            ]["text"]
-                            result["videoId"] = video["videoRenderer"]["videoId"]
+                            result = {
+                                "title": video["videoRenderer"]["title"]["runs"][0][
+                                    "text"
+                                ],
+                                "videoId": video["videoRenderer"]["videoId"],
+                            }
                             self.__results.append(result)
                         except Exception:
                             continue
@@ -57,9 +60,7 @@ class Query:
                 continue
 
     def __search__(self):
-        """
-        Perform a YouTube search and parse the results.
-        """
+        """Perform a YouTube search and parse the results."""
         encoded_query = urllib.parse.quote_plus(self.query)  # Encode the search query
         query_url = f"https://youtube.com/results?search_query={encoded_query}"  # Construct the search URL
         response = requests.get(query_url)  # Send a GET request to the search URL

@@ -1,9 +1,5 @@
 class MetaYTError(Exception):
-    """
-    Base exception for inheritance.
-    """
-
-    pass
+    """Base exception for inheritance."""
 
 
 class VideoUnavailable(MetaYTError):
