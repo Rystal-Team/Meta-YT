@@ -76,17 +76,24 @@ class Video:
 
         :param include_generated: A boolean flag that determines whether auto-generated captions should be included in the result or not. If set to `True`, all captions, including auto-generated ones, will be returned. If set to `False`, auto-generated captions will be excluded. Defaults to False.
         :type include_generated: bool
-        :return: A dictionary of Caption objects, where the keys are the language codes of the captions.
-        :rtype: dict
+        :return: A list of Caption objects.
+        :rtype: list
         """
-        return {
-            Caption(track["baseUrl"], track["languageCode"]).language: Caption(
-                track["baseUrl"], track["languageCode"]
-            )
-            for track in self.metadata.get("captions", {})
+        captions = []
+        for track in (
+            self.metadata.get("captions", {})
             .get("playerCaptionsTracklistRenderer", {})
             .get("captionTracks", [])
-            if "auto-generated"
-            not in track.get("name", {}).get("runs", [{}])[0].get("text", "")
-            or include_generated
-        }
+        ):
+            is_auto_generated = "auto-generated" in track.get("name", {}).get(
+                "runs", [{}]
+            )[0].get("text", "")
+
+            if is_auto_generated and not include_generated:
+                continue
+            else:
+                captions.append(
+                    Caption(track["baseUrl"], track["languageCode"], is_auto_generated)
+                )
+
+        return captions

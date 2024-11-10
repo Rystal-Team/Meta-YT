@@ -4,6 +4,7 @@ import requests
 import xmltodict
 from .langauge import get_language
 from html import unescape
+from .srt import convert_to_srt
 
 
 class Caption:
@@ -16,7 +17,7 @@ class Caption:
     :type language_code: str
     """
 
-    def __init__(self, baseUrl: str, language_code: str):
+    def __init__(self, baseUrl: str, language_code: str, auto_generated: bool):
         """
         Initialize a Caption object.
 
@@ -28,6 +29,7 @@ class Caption:
         self.url = "https://youtube.com{baseUrl}".format(baseUrl=baseUrl)
         self.language_code = language_code
         self.language = get_language(language_code)
+        self.auto_generated = auto_generated
         self.__transcript = []
 
         response = requests.get(self.url)
@@ -35,7 +37,7 @@ class Caption:
 
         for block in self.xml_script["transcript"]["text"]:
             line = {
-                "text": unescape(block["#text"]),
+                "text": unescape(block.get("#text", "")),
                 "start": float(block["@start"]),
                 "end": round(float(block["@start"]) + float(block["@dur"]), 3),
                 "duration": float(block["@dur"]),
