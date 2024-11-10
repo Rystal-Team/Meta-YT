@@ -1,9 +1,10 @@
 """This module contains the developer interface for captions fetching."""
 
-import requests  
-import xmltodict 
-from .langauge import get_language 
+import requests
+import xmltodict
+from .langauge import get_language
 from html import unescape
+
 
 class Caption:
     """
