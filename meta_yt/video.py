@@ -1,6 +1,7 @@
 """This module contains the developer interface for video fetching."""
 
 import requests
+
 from .caption import Caption
 
 
@@ -91,9 +92,8 @@ class Video:
 
             if is_auto_generated and not include_generated:
                 continue
-            else:
-                captions.append(
-                    Caption(track["baseUrl"], track["languageCode"], is_auto_generated)
-                )
+            captions.append(
+                Caption(track["baseUrl"], track["languageCode"], is_auto_generated)
+            )
 
         return captions
