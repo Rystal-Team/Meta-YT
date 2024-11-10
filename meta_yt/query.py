@@ -1,6 +1,7 @@
-import requests
 import json
 import urllib.parse  # Module for URL encoding
+
+import requests
 
 
 class Query:
