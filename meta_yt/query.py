@@ -45,11 +45,9 @@ class Query:
                 for video in contents["itemSectionRenderer"]["contents"]:
                     if "videoRenderer" in video.keys():
                         try:
-                            result = {}
-                            result["title"] = video["videoRenderer"]["title"]["runs"][
+                            result = {"title": video["videoRenderer"]["title"]["runs"][
                                 0
-                            ]["text"]
-                            result["videoId"] = video["videoRenderer"]["videoId"]
+                            ]["text"], "videoId": video["videoRenderer"]["videoId"]}
                             self.__results.append(result)
                         except Exception:
                             continue
