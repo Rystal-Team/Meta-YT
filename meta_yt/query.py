@@ -3,6 +3,7 @@ import urllib.parse  # Module for URL encoding
 
 import requests
 
+
 class Query:
     """
     A class to perform YouTube search queries and extract video information.
