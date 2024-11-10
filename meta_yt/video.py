@@ -1,6 +1,7 @@
 """This module contains the developer interface for video fetching."""
 
 import requests
+
 from .caption import Caption
 
 
