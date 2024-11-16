@@ -1,4 +1,3 @@
-# Meta-YT
 <br />
 <div align="center">
   <a href="https://raw.githubusercontent.com/Rystal-Team/Rystal-V6/main/assets/logo.png">
@@ -8,23 +7,24 @@
   <p align="center">
     Meta-YT is a lightweight Python library for fetching YouTube video metadata. It allows users to interact with YouTube videos, captions, and playlists, making it easier to retrieve information and captions from YouTube.
     <br />
-    <br />  
+    <br />
     <a href="https://github.com/Rystal-Team/Meta-YT/issues">Submit Issues</a> · <a href="https://github.com/Rystal-Team/Meta-YT/releases">Releases</a>
   </p>
 </div>
 
 <div align="center">
 
-  [![GitHub Forks](https://img.shields.io/github/forks/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
-  [![GitHub Stars](https://img.shields.io/github/stars/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
-  [![License](https://img.shields.io/github/license/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT/blob/main/LICENSE)
-  [![Github Watchers](https://img.shields.io/github/watchers/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
+[![GitHub Forks](https://img.shields.io/github/forks/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
+[![GitHub Stars](https://img.shields.io/github/stars/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
+[![License](https://img.shields.io/github/license/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT/blob/main/LICENSE)
+[![Github Watchers](https://img.shields.io/github/watchers/Rystal-Team/Meta-YT.svg?style=for-the-badge)](https://github.com/Rystal-Team/Meta-YT)
 
 </div>
 
 ## Key Features
 
-- **Video Metadata**: Retrieve detailed metadata for YouTube videos, including title, duration, views, thumbnails, and more.
+- **Video Metadata**: Retrieve detailed metadata for YouTube videos, including title, duration, views, thumbnails, and
+  more.
 - **Captions**: Fetch and process captions (subtitles) for YouTube videos.
 - **YouTube Search**: Perform YouTube searches and fetch metadata for the top results.
 
@@ -60,7 +60,7 @@ print(yt.video.title)
 #### Using a Video URL
 
 ```python
-yt = YouTube("https://www.youtube.com/watch?v=dQw4w9WgXcQ", isUrl=True)
+yt = YouTube("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 print(yt.video.title)
 ```
 
@@ -76,7 +76,8 @@ for caption in captions:
     print(caption.to_srt())
 ```
 
-Since this library does not include a function to download or decrypt video streams, you will need to use external libraries such as YTDL or PyTube for those purposes.
+Since this library does not include a function to download or decrypt video streams, you will need to use external
+libraries such as YTDL or PyTube for those purposes.
 
 ## API Reference
 
@@ -84,13 +85,13 @@ Since this library does not include a function to download or decrypt video stre
 
 Represents a YouTube video and provides metadata fetching functionality.
 
-#### `__init__(self, query: str, isUrl: bool = None)`
+#### `__init__(self, query: str)`
 
 Initializes a YouTube object.
 
 **Args:**
+
 - `query` (str): The search query or video URL.
-- `isUrl` (bool, optional): Whether the query is a URL. Defaults to `None`.
 
 ### `class Video`
 
@@ -101,6 +102,7 @@ Represents a YouTube video and provides methods to fetch metadata and captions.
 Initializes a Video object.
 
 **Args:**
+
 - `videoId` (str): The ID of the YouTube video.
 
 #### Attributes
@@ -123,9 +125,11 @@ Initializes a Video object.
 Fetches the captions for the video.
 
 **Args:**
+
 - `include_generated` (bool, optional): Whether to include auto-generated captions. Defaults to `False`.
 
 **Returns:**
+
 - `captions`: A list of `Caption` objects.
 
 ### `class Caption`
@@ -137,6 +141,7 @@ Represents captions for a YouTube video.
 Initializes a Caption object.
 
 **Args:**
+
 - `baseUrl` (str): The base URL of the video.
 - `language_code` (str): The ISO 639-1 language code of the captions.
 
@@ -152,6 +157,7 @@ Initializes a Caption object.
 Converts the transcript to SubRip (SRT) format.
 
 **Returns:**
+
 - `str`: The transcript in SubRip (SRT) format.
 
 ## Contributing
@@ -161,3 +167,5 @@ We welcome contributions! Please fork the repository and submit pull requests.
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+```
