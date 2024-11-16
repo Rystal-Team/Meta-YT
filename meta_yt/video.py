@@ -4,6 +4,8 @@ import requests
 
 from .caption import Caption
 
+YOUTUBE_API_KEY = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8"
+
 
 class Video:
     """
@@ -15,7 +17,7 @@ class Video:
     :type retries: int
     """
 
-    def __init__(self, videoId: str, retries=5):
+    def __init__(self, videoId: str, retries: int = 5):
         """
         Initialize a Video object with details fetched from the YouTube API.
 
@@ -26,19 +28,19 @@ class Video:
         """
         url = "https://www.youtube.com/youtubei/v1/player"
         params = {
-            "videoId": videoId,
-            "key": "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8",
+            "videoId"       : videoId,
+            "key"           : YOUTUBE_API_KEY,
             "contentCheckOk": "True",
-            "racyCheckOk": "True",
+            "racyCheckOk"   : "True",
         }
         json_data = {
             "context": {
                 "client": {
-                    "clientName": "MWEB",
+                    "clientName"   : "MWEB",
                     "clientVersion": "2.20211109.01.00",
                 }
             },
-            "api_key": "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8",
+            "api_key": YOUTUBE_API_KEY,
         }
 
         for attempt in range(retries):
@@ -83,8 +85,8 @@ class Video:
         captions = []
         for track in (
             self.metadata.get("captions", {})
-            .get("playerCaptionsTracklistRenderer", {})
-            .get("captionTracks", [])
+                .get("playerCaptionsTracklistRenderer", {})
+                .get("captionTracks", [])
         ):
             is_auto_generated = "auto-generated" in track.get("name", {}).get(
                 "runs", [{}]

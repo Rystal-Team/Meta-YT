@@ -1,5 +1,6 @@
 """This module provides the highest level interface in this module, allowing interactions with `Video`, `Caption` and `Playlist`"""
 
+from typing import Optional
 # Import necessary modules
 from urllib import parse  # Module for URL parsing
 
@@ -20,7 +21,7 @@ def check_isPlaylist(url: str) -> bool:
     return ("playlist?" in url) or ("list=" in url)
 
 
-def get_video_id(url: str) -> str | None:
+def get_video_id(url: str) -> Optional[str]:
     """
     Extract the video ID from a YouTube video URL.
 
@@ -28,7 +29,7 @@ def get_video_id(url: str) -> str | None:
         url (str): The YouTube video URL.
 
     Returns:
-        str | None: The video ID if found, None otherwise.
+        Optional[str]: The video ID if found, None otherwise.
     """
     query = parse.urlparse(url)
     if query.hostname == "youtu.be":
@@ -45,28 +46,20 @@ def get_video_id(url: str) -> str | None:
 
 
 class YouTube:
-    def __init__(self, query: str, isUrl: bool = None):
+    def __init__(self, query: str):
         """
         Initialize a YouTube object.
 
         Args:
             query (str): The search query or video URL.
-            isUrl (bool, optional): Whether the query is a URL. Defaults to None.
         """
-        self.isUrl = isUrl
         self.video = None
-        result = None
-
-        if self.isUrl:
-            result = get_video_id(query)
-
-            if result is None:
-                raise ValueError("Invalid YouTube URL")
-            self.videoId = result
+        result = get_video_id(query)
 
         if result is None:
             results = Query(query, max_results=1).results
-            print(results)
             self.videoId = results[0]["videoId"]
+        else:
+            self.videoId = result
 
         self.video = Video(self.videoId)

@@ -43,32 +43,33 @@ class Query:
         for contents in data["contents"]["twoColumnSearchResultsRenderer"][
             "primaryContents"
         ]["sectionListRenderer"]["contents"]:
-            try:
-                for video in contents["itemSectionRenderer"]["contents"]:
-                    if "videoRenderer" in video.keys():
-                        try:
-                            result = {
-                                "title": video["videoRenderer"]["title"]["runs"][0][
-                                    "text"
-                                ],
-                                "videoId": video["videoRenderer"]["videoId"],
-                            }
-                            self.__results.append(result)
-                        except Exception:
-                            continue
-            except Exception:
-                continue
+            for video in contents["itemSectionRenderer"]["contents"]:
+                if "videoRenderer" in video.keys():
+                    try:
+                        result = {
+                            "title"  : video["videoRenderer"]["title"]["runs"][0][
+                                "text"
+                            ],
+                            "videoId": video["videoRenderer"]["videoId"],
+                        }
+                        self.__results.append(result)
+                    except KeyError:
+                        continue
 
     def __search__(self):
         """Perform a YouTube search and parse the results."""
-        encoded_query = urllib.parse.quote_plus(self.query)  # Encode the search query
-        query_url = f"https://youtube.com/results?search_query={encoded_query}"  # Construct the search URL
-        response = requests.get(query_url)  # Send a GET request to the search URL
+        encoded_query = urllib.parse.quote_plus(self.query)
+        query_url = f"https://youtube.com/results?search_query={encoded_query}"
+        response = requests.get(query_url)
 
-        while "ytInitialData" not in response.text:
+        retry_limit = 15
+        retry_count = 0
+
+        while "ytInitialData" not in response.text and retry_count < retry_limit:
             response = requests.get(query_url)
+            retry_count += 1
 
-        self.__parse__(response.text)  # Parse the search response
+        self.__parse__(response.text)
 
     @property
     def results(self) -> list | None:
@@ -79,5 +80,5 @@ class Query:
         :rtype: list | None
         """
         return self.__results[
-            : self.max_results
-        ]  # Return the results, limited by the max_results count
+               : self.max_results
+               ]

@@ -18,10 +18,10 @@ class VideoUnavailable(MetaYTError):
         :type videoId: str
         """
         self.videoId = videoId
-        super().__init__(self.error_message)
+        super().__init__(self._error_message)
 
     @property
-    def error_message(self) -> str:
+    def _error_message(self) -> str:
         """
         Returns the error message for the VideoUnavailable exception.
 

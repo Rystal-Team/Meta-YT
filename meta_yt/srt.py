@@ -1,4 +1,7 @@
-def convert_to_srt(transcript):
+from typing import Dict, List
+
+
+def convert_to_srt(transcript: List[Dict[str, float]]) -> str:
     """
     Convert a transcript to SubRip (SRT) format.
 
@@ -14,7 +17,6 @@ def convert_to_srt(transcript):
         end_time = format_time(item["end"])
         text = item["text"]
 
-        # Format the SRT entry
         srt_output += f"{index + 1}\n"
         srt_output += f"{start_time} --> {end_time}\n"
         srt_output += f"{text}\n\n"
@@ -22,7 +24,7 @@ def convert_to_srt(transcript):
     return srt_output
 
 
-def format_time(seconds):
+def format_time(seconds: float) -> str:
     """
     Format the time in 'HH:MM:SS,MS' format for SRT.
 
@@ -35,6 +37,6 @@ def format_time(seconds):
     hours = int(seconds // 3600)
     minutes = int((seconds % 3600) // 60)
     seconds_remaining = seconds % 60
-    milliseconds = int((seconds_remaining - int(seconds_remaining)) * 1000)
+    milliseconds = round((seconds_remaining - int(seconds_remaining)) * 1000)
 
     return f"{hours:02}:{minutes:02}:{int(seconds_remaining):02},{milliseconds:03}"
