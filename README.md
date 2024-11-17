@@ -33,7 +33,7 @@
 Install Meta-YT using pip:
 
 ```bash
-pip install meta-yt
+pip install -U meta-yt
 ```
 
 ## Usage
