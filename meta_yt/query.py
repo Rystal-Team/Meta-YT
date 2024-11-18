@@ -47,9 +47,7 @@ class Query:
                 if "videoRenderer" in video.keys():
                     try:
                         result = {
-                            "title"  : video["videoRenderer"]["title"]["runs"][0][
-                                "text"
-                            ],
+                            "title": video["videoRenderer"]["title"]["runs"][0]["text"],
                             "videoId": video["videoRenderer"]["videoId"],
                         }
                         self.__results.append(result)
@@ -79,6 +77,4 @@ class Query:
         :return: A list containing the search results or None if no results are found.
         :rtype: list | None
         """
-        return self.__results[
-               : self.max_results
-               ]
+        return self.__results[: self.max_results]
