@@ -28,15 +28,15 @@ class Video:
         """
         url = "https://www.youtube.com/youtubei/v1/player"
         params = {
-            "videoId"       : videoId,
-            "key"           : YOUTUBE_API_KEY,
+            "videoId": videoId,
+            "key": YOUTUBE_API_KEY,
             "contentCheckOk": "True",
-            "racyCheckOk"   : "True",
+            "racyCheckOk": "True",
         }
         json_data = {
             "context": {
                 "client": {
-                    "clientName"   : "MWEB",
+                    "clientName": "MWEB",
                     "clientVersion": "2.20211109.01.00",
                 }
             },
@@ -85,8 +85,8 @@ class Video:
         captions = []
         for track in (
             self.metadata.get("captions", {})
-                .get("playerCaptionsTracklistRenderer", {})
-                .get("captionTracks", [])
+            .get("playerCaptionsTracklistRenderer", {})
+            .get("captionTracks", [])
         ):
             is_auto_generated = "auto-generated" in track.get("name", {}).get(
                 "runs", [{}]
