@@ -48,6 +48,7 @@ def get_video_id(url: str) -> Optional[str]:
 
 class YouTube:
     """A class to represent a YouTube object that handles querying and contains the video."""
+
     def __init__(self, query: str):
         """
         Initialize a YouTube object.
