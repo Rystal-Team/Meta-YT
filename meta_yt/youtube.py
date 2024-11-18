@@ -1,6 +1,7 @@
 """This module provides the highest level interface in this module, allowing interactions with `Video`, `Caption` and `Playlist`"""
 
 from typing import Optional
+
 # Import necessary modules
 from urllib import parse  # Module for URL parsing
 

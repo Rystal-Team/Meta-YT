@@ -43,9 +43,9 @@ class Caption:
 
         for block in self.xml_script["transcript"]["text"]:
             line = {
-                "text"    : unescape(block.get("#text", "")),
-                "start"   : float(block["@start"]),
-                "end"     : round(float(block["@start"]) + float(block["@dur"]), 3),
+                "text": unescape(block.get("#text", "")),
+                "start": float(block["@start"]),
+                "end": round(float(block["@start"]) + float(block["@dur"]), 3),
                 "duration": float(block["@dur"]),
             }
             self.__transcript.append(line)
