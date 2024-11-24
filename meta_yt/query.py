@@ -23,8 +23,8 @@ class Query:
         :param max_results: The maximum number of results to retrieve. Defaults to None.
         :type max_results: int, optional
         """
-        self.query = query
         self.max_results = max_results
+        self.__query = query
         self.__results = []
         self.__search__()
 
@@ -43,7 +43,7 @@ class Query:
         for contents in data["contents"]["twoColumnSearchResultsRenderer"][
             "primaryContents"
         ]["sectionListRenderer"]["contents"]:
-            for video in contents["itemSectionRenderer"]["contents"]:
+            for video in contents.get("itemSectionRenderer", {}).get("contents", []):
                 if "videoRenderer" in video.keys():
                     try:
                         result = {
@@ -56,11 +56,11 @@ class Query:
 
     def __search__(self):
         """Perform a YouTube search and parse the results."""
-        encoded_query = urllib.parse.quote_plus(self.query)
+        encoded_query = urllib.parse.quote_plus(self.__query)
         query_url = f"https://youtube.com/results?search_query={encoded_query}"
         response = requests.get(query_url)
 
-        retry_limit = 15
+        retry_limit = 50
         retry_count = 0
 
         while "ytInitialData" not in response.text and retry_count < retry_limit:
