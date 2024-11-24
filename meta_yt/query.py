@@ -43,7 +43,7 @@ class Query:
         for contents in data["contents"]["twoColumnSearchResultsRenderer"][
             "primaryContents"
         ]["sectionListRenderer"]["contents"]:
-            for video in contents["itemSectionRenderer"]["contents"]:
+            for video in contents.get("itemSectionRenderer", {}).get("contents", []):
                 if "videoRenderer" in video.keys():
                     try:
                         result = {
@@ -60,7 +60,7 @@ class Query:
         query_url = f"https://youtube.com/results?search_query={encoded_query}"
         response = requests.get(query_url)
 
-        retry_limit = 15
+        retry_limit = 50
         retry_count = 0
 
         while "ytInitialData" not in response.text and retry_count < retry_limit:
