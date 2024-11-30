@@ -168,4 +168,6 @@ We welcome contributions! Please fork the repository and submit pull requests.
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-```
+<div align="center">
+	<p><small>Copyright © 2024 <a href="https://rystal.net">Rystal</a>. All rights reserved.</small></p>
+</div>

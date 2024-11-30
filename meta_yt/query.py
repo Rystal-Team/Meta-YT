@@ -58,13 +58,13 @@ class Query:
         """Perform a YouTube search and parse the results."""
         encoded_query = urllib.parse.quote_plus(self.__query)
         query_url = f"https://youtube.com/results?search_query={encoded_query}"
-        response = requests.get(query_url)
+        response = requests.get(query_url, timeout=5)
 
         retry_limit = 50
         retry_count = 0
 
         while "ytInitialData" not in response.text and retry_count < retry_limit:
-            response = requests.get(query_url)
+            response = requests.get(query_url, timeout=5)
             retry_count += 1
 
         self.__parse__(response.text)

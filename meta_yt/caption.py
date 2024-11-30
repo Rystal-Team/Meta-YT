@@ -38,7 +38,7 @@ class Caption:
         self.auto_generated = auto_generated
         self.__transcript = []
 
-        response = requests.get(self.url)
+        response = requests.get(self.url, timeout=5)
         self.xml_script = xmltodict.parse(response.content)
 
         for block in self.xml_script["transcript"]["text"]:
