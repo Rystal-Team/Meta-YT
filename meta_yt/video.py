@@ -45,7 +45,7 @@ class Video:
 
         for attempt in range(retries):
             try:
-                response = requests.post(url, params=params, json=json_data)
+                response = requests.post(url, params=params, json=json_data, timeout=5)
                 response.raise_for_status()
                 data = response.json()["videoDetails"]
 
